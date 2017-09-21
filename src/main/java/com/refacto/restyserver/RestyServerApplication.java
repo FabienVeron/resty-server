@@ -58,6 +58,40 @@ class App {
 		return allNames;
 	}
 
+	@RequestMapping(value = "/getFRestaurants",method = RequestMethod.POST)
+	public String getAllFrenchRestaurants()
+	{
+		String allNames = "";
+		for (int i=0;i<restaurantApp.size();i++) {
+			Object restoObject = ((Object[]) restaurantApp.toArray())[i];
+			if (!(restoObject instanceof F_Restaurant)) {
+				continue;
+			}
+			IRestaurant restaurant = (IRestaurant)restoObject;
+			allNames = allNames + restaurant.getName();
+			allNames = allNames + " ,";
+		}
+		return allNames;
+	}
+
+	@RequestMapping(value = "/getCRestaurants",method = RequestMethod.POST)
+	public String getAllChineseRestaurants()
+	{
+		String allNames = "";
+		for (int i=0;i<restaurantApp.size();i++) {
+			Object restoObject = ((Object[]) restaurantApp.toArray())[i];
+			if (!(restoObject instanceof C_Restaurant)) {
+				continue;
+			}
+			IRestaurant restaurant = (IRestaurant)restoObject;
+			allNames = allNames + restaurant.getName();
+			allNames = allNames + " ,";
+		}
+		return allNames;
+	}
+
+
+
 	@RequestMapping(value = "/getTotalCapacity",method = RequestMethod.POST)
 	public int getTotalCapacityWrapper() {
 		return getReservationCapacity();
